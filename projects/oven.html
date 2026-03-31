@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Oven Control</title>
+</head>
+
+<!--Start of Webpage-->
+<body>
+  <!--Navigation Header-->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Jacob's Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--Title Section-->
+  <section class="hero" style="background-image: url('../src/oven/figure_0.jpg');">
+    <div class="hero-overlay">
+      <h1>Simulated Oven Control</h1>
+    </div>
+  </section>
+
+ <!--Start of Content-->
+  <main class="project-content">
+        <!--Outline-->
+    <h2 id="outline">Outline</h2>
+    <ul>
+      <li><a href="#description">Project Description</a></li>
+      <li><a href="#task">Task Overview</a></li>
+      <li><a href="#python">Python Implementation</a></li>
+      <li><a href="#arduino">Arduino Implementation</a></li>
+      <li><a href="#test">Testing</a></li>
+    </ul>
+
+    <!--Project Description-->
+    <section>
+      <h2 id="description">Project Description</h2>
+
+      <p>The purpose of the project is to simulate the operation of an oven by implementing several
+      relevant tasks. Python was used to create the graphical user interface (GUI) to control the
+      operation of the oven and give live temperature feedback. An Arduino microcontroller was used
+      to perform the various hardware tasks. Serial communication was used to send commands from the
+      GUI to the microcontroller. This oven control simulator was completed with one other student
+      as a final project for a Mechatronics course.</p>
+    </section>
+
+    <!--Task Overview-->
+    <section>
+      <h2 id="task">Task Overview</h2>
+      
+      <p>The complete operation of the simulated oven can be broken up into 8 separate tasks that
+      were implemented. Most tasks required corresponding functions in both Python and C++. The
+      tasks are as follows:</p>
+      <ul>
+        <li>Indicate when the oven is turned on in the GUI</li>
+        <li>Track the temperature inside the oven as a function of time</li>
+        <li>Indicate when the temperature of the oven is hot with a yellow LED</li>
+        <li>Indicate when the oven is fully heated with a green LED</li>
+        <li>Use a red LED to flash periodically when the oven is on</li>
+        <li>Activate a buzzer when the oven is fully heated</li>
+        <li>Indicate the temperature on an analog scale using a servo motor</li>
+        <li>Control the heating rate using a potentiometer</li>
+      </ul>
+
+      <p>For each of the tasks, a state-transition diagram was used to accurately track the states
+      of each component. The diagram also makes the program logic much easier. Figure 1 shows the
+      state-transition diagram for temperature. The system starts in the “Idle” state, and
+      transitions to the “Off” state when the “start” signal is received. The machine transitions to
+      the “On” state when the “on” signal is received. If the oven is turned back “off”, the oven
+      returns to the “Off” state. In the “On” state, the heat is applied, and the temperature
+      increases. Once the oven is fully heated, the machine moves to the “Steady” state, which
+      maintains the temperature within a close range. If the desired temperature of the oven is
+      increased, the system goes back to the “On” state to continue heating.</p>
+  
+      <figure>
+        <img src="../src/oven/figure_1.JPG" alt="State transition diagram for temperature control">
+        <figcaption><span class="fig-label">Figure 1:</span>State transition diagram for temperature
+        control</figcaption>
+      </figure>
+    </section>
+
+    <!--Python Implementation-->
+    <section>
+      <h2 id="python">Python Implementation</h2>
+      
+      <p>The GUI for the application was created using the “tkinter” Python module. An image of the
+      screen when the program starts is shown in Figure 2. When the “Start” button is pressed, the
+      “On” and “Off” radio buttons, along with the temperature slider, become active. The control
+      mode window becomes active when the oven is turned on. The heating rate is controlled by a
+      potentiometer, which can be set from 1–3 deg/s. This operation was to simulate ovens of
+      different sizes and heating capabilities. The green label indicates when the oven is ready
+      (corresponds to the green LED), and the yellow label is to indicate when the oven is hot
+      (corresponds to the yellow LED). A plot on the right side of the interface displays
+      temperature as a function of time once the oven is active.</p>
+
+      <figure>
+        <img src="../src/oven/figure_2.JPG" alt="GUI on startup">
+        <figcaption><span class="fig-label">Figure 2:</span>GUI on startup</figcaption>
+      </figure>
+
+      <p>Once the oven is activated, an animation of the plot becomes active. The heat increases
+      linearly until the oven temperature is raised just above the desired temperature. The oven
+      constantly turns on and off to maintain the desired temperature within a few degrees. An image
+      of the GUI showing the process over time is given in Figure 3. It is important to note that
+      the temperature range on the slider is chosen arbitrarily low. This decision was to allow the
+      oven to heat up at a reasonable pace. These values do not correspond to typical oven
+      temperatures.</p>
+
+      <figure>
+        <img src="../src/oven/figure_3.JPG" alt="GUI in normal mode">
+        <figcaption><span class="fig-label">Figure 3:</span>GUI in normal mode</figcaption>
+      </figure>
+
+      <p>The Python program also has a dynamic mode feature, which more accurately represents the
+      heating process. A first-order heating model can be enabled to get a more realistic
+      simulation. In this mode, the potentiometer controls the inverse of the time constant for the
+      exponential response. An image of the GUI using this dynamic mode is provided in Figure 4.</p>
+
+      <figure>
+        <img src="../src/oven/figure_4.JPG" alt="GUI in dynamic mode">
+        <figcaption><span class="fig-label">Figure 4:</span>GUI in dynamic mode</figcaption>
+      </figure>
+    </section>
+
+    <!--Arduino Implementation-->
+    <section>
+      <h2 id="arduino">Arduino Implementation</h2>
+      
+      <p>When an event occurs in the Python program, signals are sent to a serial port for the
+      Arduino to read. The “serial” Python library is used to send the data. The commands are
+      received by the Arduino, and depending on the type of command, certain functions are updated
+      in the program. For most of the functions in the Python code, there is a corresponding
+      function in the microcontroller implementation. To avoid slow operation, entry code was
+      applied to both programs. Entry code is the process of including entry and exit flags in each
+      function to avoid spamming the serial port with redundant commands. This feature allows single
+      commands to be sent to the terminal from Python, and that each hardware component receives
+      only a single command per state change.</p>
+
+      <p>The microcontroller was responsible for activating each of the three LEDs, activating the
+      buzzer, turning the servo motor, and receiving analog inputs from the potentiometer. A circuit
+      diagram automatically generated from Tinkercad is shown in Figure 5. The schematic shows
+      additional information, such as the resistors chosen for the LEDs and the pins used on the
+      Arduino.</p>
+
+      <figure>
+        <img src="../src/oven/figure_5.JPG" alt="Schematic of circuit">
+        <figcaption><span class="fig-label">Figure 5:</span>Schematic of circuit</figcaption>
+      </figure>
+    </section>
+
+    <!--Testing-->
+    <section>
+      <h2 id="test">Testing</h2>
+      
+      <p>Once development was complete, the circuit was wired based on the schematic and tested. An
+      image of the circuit built on a breadboard is shown in Figure 6. The Arduino is powered by a
+      laptop through the USB cable, which supplies power to all components on the board.</p>
+
+      <figure>
+        <img src="../src/oven/figure_6.JPG" alt="Schematic implemented on a breadboard">
+        <figcaption><span class="fig-label">Figure 6:</span>Schematic implemented on a
+        breadboard</figcaption>
+      </figure>
+
+      <p>A live demonstration of the oven simulator is given in Video 1. The video walks through all
+      of the tasks outlined above. The dynamic mode was enabled, which incorporates the more
+      accurate heating model. The potentiometer was also used to show the impact of heating the oven
+      faster. A screen recording of the GUI is also shown in the video allowing comparison between
+      the interface and hardware outputs in real time.</p>
+
+      <figure class="video-figure">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/vH7YWo0lN6s" title="Demo of Simulated Oven
+          Control" allow="encrypted-media; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+        <figcaption><span class="fig-label">Video 1:</span>Demo of simulated oven
+        control</figcaption>
+      </figure>
+
+      <a href="#outline" class="return-link">↑ Return to Outline</a>
+    </section>
+  </main>
+</body>
+</html>

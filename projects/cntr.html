@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>CNTR Engine</title>
+</head>
+
+<!--Start of Webpage-->
+<body>
+  <!--Navigation Header-->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Jacob's Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--Title Section-->
+  <section class="hero" style="background-image: url('../src/cntr/figure_0.jpg');">
+    <div class="hero-overlay">
+      <h1>NASA CNTR Engine</h1>
+    </div>
+  </section>
+
+  <!--Start of Content-->
+  <main class="project-content">
+    <!--Outline-->
+    <h2 id="outline">Outline</h2>
+    <ul>
+      <li><a href="#description">Project Description</a></li>
+      <li><a href="#engine">Engine Functionality</a></li>
+      <li><a href="#design">Model Design</a></li>
+      <li><a href="#printing">Model 3D Printing</a></li>
+      <li><a href="#resource">Additional Resources</a></li>
+      <li><a href="#financial">Financial Analysis</a></li>
+    </ul>
+
+    <!--Project Description-->
+    <section>
+      <h2 id="description">Project Description</h2>
+
+      <p>The goal of this project is to produce a 3D-printed educational model of a centrifugal
+      nuclear thermal rocket (CNTR) engine that can be easily assembled and disassembled. The engine
+      is part of ongoing research supported by NASA for future deep-space propulsion, including
+      potential missions to Mars. NASA provided the necessary tools to educate the team on the
+      operation of the CNTR. Resources, such as CAD models of the engine, were also provided. This
+      project was completed by a team of four students as part of a mechanical engineering capstone
+      project at the University of Rhode Island.</p>
+    </section>
+
+    <!--Engine Functionality-->
+    <section>
+      <h2 id="engine">Engine Functionality</h2>
+
+      <p>A cross-sectional view of the engine is shown in Figure 1. In the figure, the hydrogen
+      propellant path is shown (green arrows). The initially cold hydrogen flows into the inlet to
+      the left of the figure. The hydrogen propellant enters from the left side of the engine and
+      initially flows along the outer region of the vessel, providing cooling. It then travels
+      downward and is redirected upward along the outer surface of the fuel elements. After reaching
+      the top, the flow is directed into the centrifuges through openings in the tapered surface.
+      Centrifugal forces push the hydrogen outward against the inner walls of the fuel elements
+      before it moves inward, where it is heated by the nuclear fuel. The high-temperature
+      propellant then exits through the nozzle on the right.</p>
+
+      <figure>
+        <img src="../src/cntr/figure_1.JPG" alt="CNTR flow path">
+        <figcaption><span class="fig-label">Figure 1:</span>CNTR flow path; <i>Source: Houts, Michael.
+        “High Performance Nuclear Thermal Propulsion (HPNTP)” NASA, 15 July 2021</i></figcaption>
+      </figure>
+
+      <p>The gray section is the moderator block, which contains a porous medium of a material yet
+      to be finalized. The material that will most likely be used is beryllium or silicon carbide.
+      The red area represents the liquid uranium, while the orange is a mixture of uranium and
+      hydrogen. This part of the operation of the engine is a major challenge because transporting
+      gas through a liquid medium presents significant engineering challenges. Also, the hydrogen
+      inflow needs to separate the hydrogen from the uranium originally. This inflow would need to
+      be porous to allow the hydrogen to pass, but while preventing uranium from flowing radially
+      outward due to centrifugal forces.</p>
+
+      <p>A summary of the design specifications that NASA has
+      proposed is included in Table 1. The specific impulse of the rocket is a measure of the thrust
+      produced per unit of propellant consumption. The zirconium carbide layer refers to a
+      protective layer located inside the centrifuge.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 1:</span>Constraints on CNTR Engine</figcaption>
+        <table class="styled-table">
+          <tbody>
+            <tr><td>Specific Impulse</td><td>1,300 – 1,800 isp</td></tr>
+            <tr><td>Round Trip Time</td><td>&lt; 15 months</td></tr>
+            <tr><td>Centrifuge Rotation Speed</td><td>&gt; 5,000 RPM</td></tr>
+            <tr><td>Reactor Mass</td><td>&lt; 2,000 kg</td></tr>
+            <tr><td>Uranium Temperature</td><td>&gt; 4,400 K</td></tr>
+            <tr><td>Zirconium Carbide Temperature</td><td>&lt; 1,500 K</td></tr>
+            <tr><td>Moderator Block Temperature</td><td>&lt; 800 K</td></tr>
+            <tr><td>Centrifuge Diameter</td><td>10 cm</td></tr>
+            <tr><td>Centrifuge Height</td><td>1 m</td></tr>
+            <tr><td>Number of Centrifuges</td><td>19</td></tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <!--Model Design-->
+    <section>
+      <h2 id="design">Model Design</h2>
+
+      <p>The final design of the educational model is shown in Figure 2. A cross-sectional view of
+      the model is shown in Figure 3. The original design was modified from above to make the
+      assembly and disassembly processes easier, particularly for users unfamiliar with the system.
+      SolidWorks was used for the CAD design.</p>
+
+      <figure>
+        <img src="../src/cntr/figure_2.JPG" alt="Model of Engine for 3D printing" class="medium">
+        <figcaption><span class="fig-label">Figure 2:</span>Model of engine for 3D
+        printing</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_3.JPG" alt="Cross-section of engine model" class="medium">
+        <figcaption><span class="fig-label">Figure 3:</span>Cross-section of engine
+        model</figcaption>
+      </figure>
+
+      <p>The bill of materials for the full model is given in Table 2. The numbers accurately
+      represent characteristics from the real model in Figure 1. A total of 36 parts are needed for
+      the 3D printed model. An exploded view of all the parts in the model is shown in Figure 4. In
+      this view, the quantities from the table can easily be seen.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 2:</span>Bill of Materials for 3D
+        Printing</figcaption>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Item Number</th>
+              <th>Part Name</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>1</td><td>Centrifuge</td><td>19</td></tr>
+            <tr><td>2</td><td>Control Drum</td><td>12</td></tr>
+            <tr><td>3</td><td>Nozzle</td><td>1</td></tr>
+            <tr><td>4</td><td>Bottom Base Plate</td><td>1</td></tr>
+            <tr><td>5</td><td>Top Dome Plate</td><td>1</td></tr>
+            <tr><td>6</td><td>Matrix</td><td>1</td></tr>
+            <tr><td>7</td><td>Outer Vessel</td><td>1</td></tr>
+            <tr class="table-total">
+              <td></td>
+              <td>Total Parts</td>
+              <td>36</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_4.JPG" alt="Exploded view of engine model" class="medium">
+        <figcaption><span class="fig-label">Figure 4:</span>Exploded view of engine
+        model</figcaption>
+      </figure>
+
+      <p>There are some changes between the model that was provided and the model that was printed
+      that are worth mentioning. The turbine blades of the centrifuges needed to be thickened
+      significantly to allow for traditional 3D printing. More realistic blades were produced on
+      resin 3D printers, although it wasn’t practical to print the whole model on these printers.
+      Another modification was the addition of a nozzle to improve visual resemblance to a
+      spacecraft. Lastly, The cylindrical symmetry of the model was leveraged to create easy mating
+      of the parts. A simple slide, 90-degree twist, and lock of the larger components was
+      implemented. Figure 5 shows a view of this locking mechanism.</p>
+
+      <figure>
+        <img src="../src/cntr/figure_5.JPG" alt="Examples of mating system" class="medium">
+        <figcaption><span class="fig-label">Figure 5:</span>Examples of mating system</figcaption>
+      </figure>
+    </section>
+
+    <!--Model 3D Printing-->
+    <section>
+      <h2 id="printing">Model 3D Printing</h2>
+
+      <p>The fully printed and assembled model is shown in Figure 6. A cutaway view of the model,
+      useful for educational purposes, is shown in Figure 7. Each centrifuge was painted so that the
+      four main components could be identified. These components are the centrifuge body (brown),
+      turbine blades (silver), redirection disk (white), and bearing (black). An image of the
+      painted centrifuges is shown.</p>
+
+      <figure>
+        <img src="../src/cntr/figure_6.JPG" alt="Fully assembled 3D printed model">
+        <figcaption><span class="fig-label">Figure 6:</span>Fully assembled 3D printed
+        model</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_7.JPG" alt="3D printed cross-sectional model">
+        <figcaption><span class="fig-label">Figure 7:</span>3D printed cross-sectional
+        model</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_8.JPG" alt="Painted centrifuges">
+        <figcaption><span class="fig-label">Figure 8:</span>Painted centrifuges</figcaption>
+      </figure>
+
+      <p>A breakdown of time and filament requirements to complete this project for both the full
+      model and cross-sectional model is given in Tables 3 and 4, respectively. The full project
+      took over 600 hours of print time and 5.6 kg of filament to complete. The cost of all the
+      filament was $140.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 3:</span>Total Print Time and Costs for Full
+        Model</figcaption>
+        <table class="styled-table long">
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Supports</th>
+              <th>Time to Print (hr)</th>
+              <th>Filament (g)</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Bottom Base
+            Plate</td><td>Breakaway</td><td>21.82</td><td>210</td><td>$5.25</td></tr>
+            <tr><td>Centrifuges</td><td>-</td><td>68.47</td><td>767</td><td>$19.18</td></tr>
+            <tr><td>Control Drums</td><td>-</td><td>33.10</td><td>438</td><td>$10.95</td></tr>
+            <tr><td>Matrix</td><td>Breakaway</td><td>106.18</td><td>1,402</td><td>$35.05</td></tr>
+            <tr><td>Nozzle</td><td>Breakaway</td><td>50.13</td><td>782</td><td>$19.55</td></tr>
+            <tr><td>Outer
+            Vessel</td><td>Breakaway</td><td>61.65</td><td>527</td><td>$13.18</td></tr>
+            <tr><td>Top Dome Plate</td><td>PLA+</td><td>125.43</td><td>449</td><td>$11.23</td></tr>
+            <tr class="table-total-right">
+              <td></td>
+              <td>Totals</td>
+              <td>466.78</td>
+              <td>4,575</td>
+              <td>$114.38</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 4:</span>Total Print Time and Costs for
+        Cross-Sectional Model</figcaption>
+        <table class="styled-table long">
+          <thead>
+            <tr>
+              <th>Part</th>
+              <th>Supports</th>
+              <th>Time to Print (hr)</th>
+              <th>Filament (g)</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Centrifuges</td><td>-</td><td>10.85</td><td>107</td><td>$2.68</td></tr>
+            <tr><td>Control Drums</td><td>-</td><td>10.97</td><td>129</td><td>$3.23</td></tr>
+            <tr><td>Matrix</td><td>Breakaway</td><td>32.65</td><td>389</td><td>$9.73</td></tr>
+            <tr><td>Outer Vessel</td><td>Breakaway</td><td>10.98</td><td>157</td><td>$3.93</td></tr>
+            <tr><td>Top Dome Plate</td><td>PLA+</td><td>69.92</td><td>246</td><td>$6.15</td></tr>
+            <tr class="table-total-right">
+              <td></td>
+              <td>Totals</td>
+              <td>135.37</td>
+              <td>1,028</td>
+              <td>$25.70</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <p>Some additional specifications of the 3D printing process are shown in Table 5. All
+      dimensions of the engine were scaled down by a factor of 4.4, which results in a volume scale
+      factor of 85. The small nozzle diameter and layer heights explain the long print times and
+      high-resolution of the print quality.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 5:</span>3D Print Settings</figcaption>
+        <table class="styled-table">
+          <tbody>
+            <tr><td>Printer</td><td>Ultimaker S5</td></tr>
+            <tr><td>Material</td><td>PLA+</td></tr>
+            <tr><td>Supports</td><td>Breakaway White</td></tr>
+            <tr><td>Scale</td><td>1:85</td></tr>
+            <tr><td>Nozzle Diameter</td><td>0.4 mm</td></tr>
+            <tr><td>Layer Height</td><td>0.1 – 0.2 mm</td></tr>
+            <tr><td>Tolerance</td><td>0.4 – 1.2 mm</td></tr>
+            <tr><td>Infill</td><td>5% Triangles</td></tr>
+            <tr><td>Print Speed</td><td>70 mm/s</td></tr>
+          </tbody>
+        </table>
+      </figure>
+    </section>
+
+    <!--Additional Resources-->
+    <section>
+      <h2 id="resource">Additional Resources</h2>
+
+      <p>The team was also responsible for creating other educational resources to help others
+      understand the operation of the CNTR. These resources include assembly/disassembly
+      instructions, a brochure, and a poster. The assembly and disassembly instructions are shown in
+      Figures 9 and 10, respectively. The brochure highlights the functionality of the main parts of
+      the engine. This summary is provided in Figure 11.</p>
+
+      <figure>
+        <img src="../src/cntr/figure_9.JPG" alt="Assembly instructions">
+        <figcaption><span class="fig-label">Figure 9:</span>Assembly instructions</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_10.JPG" alt="Disassembly instructions">
+        <figcaption><span class="fig-label">Figure 10:</span>Disassembly instructions</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_11.JPG" alt="Engine components summary">
+        <figcaption><span class="fig-label">Figure 11:</span>Engine components summary</figcaption>
+      </figure>
+    </section>
+
+    <!--Financial Analysis-->
+    <section>
+      <h2 id="financial">Financial Analysis</h2>
+
+      <p>Another project deliverable is an in-depth cost analysis of the entire project. The labor
+      hours and corresponding costs for the Spring semester of the capstone project are summarized
+      in Table 6. The corresponding pie chart of the hours is shown in Figure 12. Fall semester
+      costs and labor are not included, since they were not spent on CAD modeling or 3D printing.
+      </p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 6:</span>Summary of Group Hours and
+        Costs</figcaption>
+        <table class="styled-table long">
+          <thead>
+            <tr>
+              <th>Assignment</th>
+              <th>Individual Hours</th>
+              <th>Group Hours</th>
+              <th>Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>CAD</td><td>50</td><td>200</td><td>$6,000</td></tr>
+            <tr><td>3D Printing</td><td>20</td><td>80</td><td>$2,400</td></tr>
+            <tr><td>Post-Processing</td><td>15</td><td>60</td><td>$1,800</td></tr>
+            <tr><td>Poster</td><td>5</td><td>25</td><td>$750</td></tr>
+            <tr><td>Brochure</td><td>3</td><td>12</td><td>$360</td></tr>
+            <tr><td>Assembly Instructions</td><td>3</td><td>12</td><td>$360</td></tr>
+            <tr><td>Reports</td><td>20</td><td>80</td><td>$2,400</td></tr>
+            <tr><td>Presentations</td><td>5</td><td>20</td><td>$600</td></tr>
+            <tr><td>Meetings</td><td>10</td><td>40</td><td>$1,200</td></tr>
+            <tr class="table-total-right">
+              <td></td>
+              <td>Totals</td>
+              <td>529</td>
+              <td>$15,870</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <figure>
+        <img src="../src/cntr/figure_12.JPG" alt="Pie chart of total hours spent" class="medium">
+        <figcaption><span class="fig-label">Figure 12:</span>Pie chart of total hours
+        spent</figcaption>
+      </figure>
+
+      <p>A comprehensive cost summary, including machine operating times, filament costs, and costs
+      of other individuals involved with the project, is provided in Table 7. Both semesters were
+      included in this analysis. The project was partially funded by the Rhode Island Space
+      Grant.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 7:</span>Total Costs for Entire
+        Project</figcaption>
+        <table class="styled-table long">
+          <thead>
+            <tr>
+              <th>Description</th>
+              <th>Rate</th>
+              <th>Amount</th>
+              <th>Price</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>Team Hours</td><td>$30/hr</td><td>955 hr</td><td>$28,650</td></tr>
+            <tr><td>Sponsor Hours</td><td>$70/hr</td><td>18 hr</td><td>$1,260</td></tr>
+            <tr><td>Faculty Hours</td><td>$150/hr</td><td>5 hr</td><td>$750</td></tr>
+            <tr><td>Filament</td><td>$25/kg</td><td>7 kg</td><td>$175</td></tr>
+            <tr><td>Print Lab</td><td>$8/hr</td><td>850 hr</td><td>$6,800</td></tr>
+            <tr><td>Overhead</td><td>57.5%</td><td>$37,635</td><td>$21,640</td></tr>
+            <tr class="table-total">
+              <td></td>
+              <td></td>
+              <td>Total</td>
+              <td>$59,275</td>
+            </tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <a href="#outline" class="return-link">↑ Return to Outline</a>
+    </section>
+  </main>
+</body>
+</html>

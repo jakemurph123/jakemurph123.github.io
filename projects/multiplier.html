@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Binary Multiplier</title>
+</head>
+
+<!--Start of Webpage-->
+<body>
+  <!--Navigation Header-->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Jacob's Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--Title Section-->
+  <section class="hero" style="background-image: url('../src/multiplier/figure_0.jpg');">
+    <div class="hero-overlay">
+      <h1>Sequential Binary Multiplier</h1>
+    </div>
+  </section>
+
+  <!--Start of Content-->
+  <main class="project-content">
+    <!--Outline-->
+    <h2 id="outline">Outline</h2>
+    <ul>
+      <li><a href="#description">Project Description</a></li>
+      <li><a href="#data">Datapath Design</a></li>
+      <li><a href="#algorithm">Algorithm</a></li>
+      <li><a href="#controller">Controller Design</a></li>
+      <li><a href="#test">Testing</a></li>
+    </ul>
+
+    <!--Project Description-->
+    <section>
+      <h2 id="description">Project Description</h2>
+
+      <p>The goal of this project is to construct a sequential binary multiplier on a breadboard.
+      The multiplier takes two 4-bit binary numbers and produces an 8-bit binary product. The inputs
+      and output numbers are indicated using LEDs. Digital parallel multipliers require much more
+      hardware to perform the same task, but they perform the operation more efficiently. A sequential
+      multiplier uses less hardware but requires several clock cycles to complete. A hardware
+      algorithm is used to execute the sequential operations. A high-level block diagram is shown in
+      Figure 1.</p>
+
+      <figure>
+        <img src="../src/multiplier/figure_1.JPG" alt="Sequential binary multiplier block diagram">
+        <figcaption><span class="fig-label">Figure 1:</span>Sequential binary multiplier block
+        diagram</figcaption>
+      </figure>
+    </section>
+    
+    <!--Project Description-->
+    <section>
+      <h2 id="data">Datapath Design</h2>
+
+      <p>A block diagram of the datapath is shown in Figure 2. To implement the long multiplication
+      in hardware, a 4-bit parallel adder, two 8-bit shift registers, a counter, and a flip-flop to
+      hold the carry bit of the adder are required. Register A holds the summation of the adder and
+      Register B initially holds the multiplier. The flip-flop, Register A, and Register B form a
+      cascaded shift register. The carry bit of the flip-flop shifts into the most significant bit
+      (MSB) of Register A. The least significant bit (LSB) of Register A shifts into the MSB of
+      Register B. The LSB of Register B is used as an input signal to the controller. The counter
+      increments after each multiplier bit is processed. Since the multiplier is 4-bit, the counter
+      increments four times before sending a signal to the controller that the multiplication
+      process is complete.</p>
+
+      <figure>
+        <img src="../src/multiplier/figure_2.JPG" alt="Datapath block diagram">
+        <figcaption><span class="fig-label">Figure 2:</span>Datapath block diagram</figcaption>
+      </figure>
+
+      <p>The multiplicand and multiplier bits could be set using switches; however, a debouncing
+      circuit would need to be included for each of the eight switches. Instead, a ripple counter
+      can be used to specify these values. Only two push buttons and two debouncing circuits are
+      required to specify both the multiplicand and multiplier. For this reason, the push buttons
+      and ripple counters are used. The buttons for the multiplicand and multiplier are labeled B1
+      and B2 in the figure, respectively.</p>
+    </section>
+    
+    <!--Algorithm-->
+    <section>
+      <h2 id="algorithm">Algorithm</h2>
+
+      <p>Multiplying two binary numbers is no different than using long multiplication on two
+      decimal numbers. Implementing the steps to long multiplication is algorithmic in nature.
+      Multiplying two binary numbers is relatively simple since the individual products only require
+      zeros and ones. The steps to perform the algorithm in hardware are as follows:</p>
+
+      <ol>
+        <li>Initialize Register A to 0 and load the multiplier into Register B</li>
+        <li>If the LSB of Register B is 1, add the multiplicand to Register A</li>
+        <li>Shift the output of the carry flip-flop into the MSB of Register A, and shift the LSB of
+        Register A into the MSB of Register B</li>
+        <li>Increment the counter</li>
+        <li>Repeat steps 2–4 until the counter reaches four iterations</li>
+      </ol>
+    </section>
+
+    <!--Controller Design-->
+    <section>
+      <h2 id="controller">Controller Design</h2>
+
+      <p>The controller is responsible for monitoring the state of the datapath and providing the
+      necessary control signals to perform the operations. A state transition diagram of the
+      controller is shown in Figure 3. The system starts in the “Idle” state, and when the “start”
+      signal is asserted, the “load” signal is sent to the datapath. The system then transitions to
+      the ‘Add’ state, where the “increment” signal is sent to the datapath, and the “add” signal is
+      only sent if the LSB of Register B is high. After a single clock cycle, the system transitions
+      to the “Shift” state in which the “shift” signal is sent to the datapath. The machine goes
+      back into the “Add” state, and the process repeats until the “done” signal is received in the
+      “Shift” state. At this point, the product is complete, and the machine moves back into the
+      “Idle” state.</p>
+
+      <figure>
+        <img src="../src/multiplier/figure_3.JPG" alt="State transition diagram">
+        <figcaption><span class="fig-label">Figure 3:</span>State transition diagram</figcaption>
+      </figure>
+
+      <p>A block diagram of the controller is shown in Figure 4. The states of the machine can be
+      stored in D-type flip-flops. There are a total of three states, and each flip-flop can store
+      two states, so two flip-flops are needed. The outputs of the flip-flops can pass through a 2 X
+      4 decoder that can select the correct state based on the logic of the input signals. This
+      block in the diagram consists of various logic gates that implement digital circuits that were
+      optimized using Karnaugh maps. The “start” signal is implemented using a push button B3. The
+      “last” input signal is the LSB of Register B and tracks when the “add” signal needs to be
+      asserted. The “done” input signal comes from the counter in the datapath. The “clock” is a
+      square waveform input to synchronize all the sequential devices. Lastly, the “reset” signal
+      can be used to reset the flip-flops back to the “Idle” state, although this is not strictly
+      required, as the system returns to the ‘Idle’ state automatically at the end of operation.
+      This signal is implemented on push button B4.</p>
+
+      <figure>
+        <img src="../src/multiplier/figure_4.JPG" alt="Controller block diagram">
+        <figcaption><span class="fig-label">Figure 4:</span>Controller block diagram</figcaption>
+      </figure>
+    </section>
+
+    <!--Testing-->
+    <section>
+      <h2 id="test">Testing</h2>
+
+      <p>The complete circuit implemented on a breadboard is shown in Figure 5. The green LEDs
+      represent the multiplicand, the yellow LEDs represent the multiplier, and the red LEDs
+      represent the final product. The first four push buttons are B1–B4, and the last push button
+      was used as a manual clock for testing. The four switches on the bottom right of the image
+      were used to simulate the four control signals without having the controller design present.
+      The two integrated circuits (ICs) located to the left of the switches were used to debounce
+      the switches. The fifth pushbutton, switches, and debouncing ICs are not needed in the final
+      design. A function generator is used off-screen to generate the clock signal for the various
+      ICs.</p>
+
+      <figure>
+        <img src="../src/multiplier/figure_5.JPG" alt="Circuit implemented on a breadboard">
+        <figcaption><span class="fig-label">Figure 5:</span>Circuit implemented on a
+        breadboard</figcaption>
+      </figure>
+
+      <p>In total, 17 ICs are required to create the sequential multiplier. A table with the
+      standardized part numbers and quantities of each IC is shown in Table 1. Many of the ICs were
+      needed to implement logic inverters since these parts were not readily on hand. For example,
+      all the LEDs had an inverter since the outputs of many of the ICs were active low. Also, a
+      Schmitt trigger inverter was used to debounce the pushbuttons.</p>
+
+      <figure class="table-figure">
+        <figcaption><span class="fig-label">Table 1:</span>Integrated Circuit Totals</figcaption>
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>IC Number</th>
+              <th>IC Description</th>
+              <th>Quantity</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>7400</td><td>2-Input NAND Gate</td><td>2</td></tr>
+            <tr><td>7404</td><td>Inverter</td><td>3</td></tr>
+            <tr><td>7408</td><td>2-Input AND Gate</td><td>1</td></tr>
+            <tr><td>7414</td><td>Schmitt Trigger Inverter</td><td>1</td></tr>
+            <tr><td>7432</td><td>2-Input OR Gate</td><td>1</td></tr>
+            <tr><td>7474</td><td>D Flip-Flop</td><td>2</td></tr>
+            <tr><td>7483</td><td>4-Bit Full Adder</td><td>1</td></tr>
+            <tr><td>7493</td><td>4-Bit Ripple Counter</td><td>2</td></tr>
+            <tr><td>74155</td><td>2 X 4 Decoder</td><td>1</td></tr>
+            <tr><td>74161</td><td>4-Bit Synchronous Counter</td><td>1</td></tr>
+            <tr><td>74194</td><td>4-Bit Bidirectional Shift Register</td><td>2</td></tr>
+          </tbody>
+        </table>
+      </figure>
+
+      <p>The full operation of the binary sequential multiplier is shown in Video 1. As can be seen,
+      the first two push buttons were used to set the multiplicand and multiplier through the ripple
+      counters. The values shown on the yellow and green LEDs correspond to 15 and 11 in decimal,
+      respectively. When the start button is pressed, the system computes the product of 165
+      displayed in binary on the red LEDs. The function generator is set at a high frequency so that
+      individual operations are not visually distinguishable.</p>
+
+      <figure class="video-figure">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/smC9nxhIX6c" title="Demo of Binary Sequential
+          Multiplier (Fast)" allow="encrypted-media; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+        <figcaption><span class="fig-label">Video 1:</span>Demo of binary sequential multiplier
+        (fast)</figcaption>
+      </figure>
+      
+      <p>Video 2 shows the full operation of the multiplier with the function generator slowed down
+      to 1 Hz. A total of 9 clock cycles are needed to get the final result. A parallel binary
+      multiplier can operate in a single clock cycle at the expense of significantly more
+      hardware.</p>
+
+      <figure class="video-figure">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/ZDWQUEynHwk" title="Demo of Binary Sequential
+          Multiplier (slow)" allow="encrypted-media; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+        <figcaption><span class="fig-label">Video 2:</span>Demo of binary sequential multiplier
+        (slow)</figcaption>
+      </figure>
+
+      <a href="#outline" class="return-link">↑ Return to Outline</a>
+    </section>
+  </main>
+</body>
+</html>

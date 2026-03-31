@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../styles.css">
+  <title>Frequency Counter</title>
+</head>
+
+<!--Start of Webpage-->
+<body>
+  <!--Navigation Header-->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Jacob's Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="../index.html">Home</a></li>
+        <li><a href="../projects.html">Projects</a></li>
+        <li><a href="../about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--Title Section-->
+  <section class="hero" style="background-image: url('../src/counter/figure_0.jpg');">
+    <div class="hero-overlay">
+      <h1>Auto-Scaled Frequency Counter</h1>
+    </div>
+  </section>
+
+  <!--Start of Content-->
+  <main class="project-content">
+    <!--Outline-->
+    <h2 id="outline">Outline</h2>
+    <ul>
+      <li><a href="#description">Project Description</a></li>
+      <li><a href="#period">Period Counter</a></li>
+      <li><a href="#division">Division Circuit</a></li>
+      <li><a href="#bcd">Binary-to-BCD Converter</a></li>
+      <li><a href="#frequency">Frequency Counter</a></li>
+      <li><a href="#test">Testing</a></li>
+    </ul>
+
+    <!--Project Description-->
+    <section>
+      <h2 id="description">Project Description</h2>
+
+      <p>The goal of this project is to develop an auto-scaling frequency counter in hardware using
+      SystemVerilog. The seven-segment display of an FPGA board is used to show the measured
+      frequency. The input signal is a digital periodic square wave. The frequency counter supports
+      frequencies in the range of 1 Hz to 10 kHz, while maintaining 4 significant figures of
+      accuracy. The development board used is the Nexys A7, which contains the Artix 7
+      XC7A100T-1CSG324C FPGA. The system can be broken up into three separate modules.</p>
+    </section>
+
+    <!--Period Counter-->
+    <section>
+      <h2 id="period">Period Counter</h2>
+
+      <p>The period counter is used to measure the period between two rising edges. The inputs to
+      this module include the clock, reset, start, and signal bits. The output includes the ready
+      and done tick signals, as well as a 20-bit representation of the measured period. Figure 1
+      shows the symbol for the period counter with the corresponding inputs and outputs.</p>
+
+      <figure>
+        <img src="../src/counter/figure_1.JPG" alt="Period counter symbol" class="short">
+        <figcaption><span class="fig-label">Figure 1:</span>Period counter symbol</figcaption>
+      </figure>
+
+      <p>A finite state machine with a datapath (FSMD) can be used to implement the circuit. The
+      state transition diagram is shown in Figure 2, while the datapath is explained. Once the
+      “start” bit is asserted, the system transitions from the “Idle” state to the “Wait” state.
+      Once the first edge is detected, the register storing the time in microseconds and the
+      register holding the number of clock pulses are reset. The state then transitions to the
+      “Count” state. The circuit waits for the second rising edge, while the two counting registers
+      are updated. The clock pulses register updates every clock cycle. The microseconds register
+      increments once every 100 clock cycles (100 MHz clock corresponds to 1 μs resolution). Once
+      the second rising edge is detected, the module transitions to the “Done” state, where the
+      “done” signal is asserted. After one clock cycle, the machine returns to the “Idle” state and
+      counting ends.</p>
+
+      <figure>
+        <img src="../src/counter/figure_2.JPG" alt="Period counter state transition diagram">
+        <figcaption><span class="fig-label">Figure 2:</span>Period counter state transition
+        diagram</figcaption>
+      </figure>
+    </section>
+
+    <!--Division Circuit-->
+    <section>
+      <h2 id="division">Division Circuit</h2>
+
+      <p>The division circuit is needed to compute frequency by performing division operations,
+      particularly those involving measuring periods. The inputs to this circuit include the clock,
+      reset, and start signals, as well as the divisor and dividend registers of configurable width.
+      The outputs of the circuit include the ready and done tick signals, as well as the quotient
+      and remainder registers. Figure 3 shows the symbol for the division circuit module with the
+      corresponding inputs and outputs.</p>
+
+      <figure>
+        <img src="../src/counter/figure_3.JPG" alt="Division circuit symbol" class="short">
+        <figcaption><span class="fig-label">Figure 3:</span>Division circuit symbol</figcaption>
+      </figure>
+
+      <p>The long division algorithm used is analogous to the long division operation between two
+      binary numbers. An FSMD can also be used for this circuit. The flow of the datapath is as
+      follows:</p>
+
+      <ol>
+        <li>Extend the dividend by appending zeros to match the required width</li>
+        <li>If the current partial dividend is greater than or equal to the divisor, subtract
+        the divisor and append a ‘1’ to the quotient; otherwise, append a ‘0’</li>
+        <li>Shift the partial result and bring in the next dividend bit</li>
+        <li>Repeat until all dividend bits are processed</li>
+      </ol>
+
+      <p>The state transition diagram is shown in Figure 4. Once the “start” bit is asserted, the
+      state transitions from the “Idle” state to the “Op” state. When only one operation remains in
+      the division process, the machine transitions to the “Last” state. The quotient and remainder
+      registers are then finalized. After a clock cycle, the machine transitions to the “Done”
+      state, where the “done” signal is asserted. The system immediately returns to the “Idle”
+      state.</p>
+
+      <figure>
+        <img src="../src/counter/figure_4.JPG" alt="Division circuit state transition diagram">
+        <figcaption><span class="fig-label">Figure 4:</span>Division circuit state transition
+        diagram</figcaption>
+      </figure>
+    </section>
+
+    <!--Binary-to-BCD Converter-->
+    <section>
+      <h2 id="bcd">Binary-to-BCD Converter</h2>
+
+      <p>The purpose of this circuit is to convert incoming binary data to binary coded decimal
+      (BCD) format. In this format, each group of 4 bits represents a decimal digit. This conversion
+      simplifies the operation of the seven-segment display. In addition, the circuit also
+      determines the location of the decimal point for the frequency counter. The inputs to this
+      module include the clock, reset, and start signals, as well as the 24-bit binary data. The
+      outputs include the ready and done ticks, the 4 significant figures used for the frequency
+      counter in BCD, and the decimal point location. Figure 5 shows the symbol for the converter
+      with the corresponding inputs and outputs.</p>
+
+      <figure>
+        <img src="../src/counter/figure_5.JPG" alt="Binary-to-BCD converter symbol" class="short">
+        <figcaption><span class="fig-label">Figure 5:</span>Binary-to-BCD converter
+        symbol</figcaption>
+      </figure>
+
+      <p>The conversion circuit uses yet another FSMD. Four BCD digit registers form a larger
+      register. The digit registers are initially empty. The following process applies to the input
+      binary data along with the four registers:</p>
+
+      <ol>
+        <li>For each BCD digit register, add 3 if the digit is greater than 4</li>
+        <li>Shift the entire BCD register to the left one position and shift the most
+        significant bit of the binary input into the least significant bit of the BCD register</li>
+        <li>Repeat steps 1 and 2 until all binary bits have been shifted into the BCD register</li>
+      </ol>
+
+      <p>The state transition diagram is almost identical to the division circuit state machine,
+      except for minor changes as shown in Figure 6. The machine transitions from the “Idle” state
+      to the “Op” state when the “start” bit is asserted. Once all input binary bits have shifted
+      into the entire BCD register, the system transitions into the “Alter” state. In this state,
+      the 4 significant figures for the frequency counter are extracted, and the decimal point
+      position is determined. The machine transitions to the “Done” state, where the “done” signal
+      is asserted. The system immediately returns to the “Idle” state.</p>
+
+      <figure>
+        <img src="../src/counter/figure_6.JPG" alt="Binary-to-BCD converter state transition
+        diagram">
+        <figcaption><span class="fig-label">Figure 6:</span>Binary-to-BCD converter state transition
+        diagram</figcaption>
+      </figure>
+    </section>
+
+    <!--Frequency Counter-->
+    <section>
+      <h2 id="frequency">Frequency Counter</h2>
+
+      <p>The three modules discussed above, along with a separate seven-segment display module, can
+      be combined to form the frequency counter. The display module takes the BCD outputs and uses
+      time division multiplexing to display all four digits at the same time. The inputs to the
+      top-level module include the clock, start and reset push buttons, and the square wave input
+      signal provided by a function generator. Figure 7 shows how all subsystems (excluding the
+      display module) are wired together. The dividend is set to 1,000,000,000 (decimal) to preserve
+      additional significant figures during division, even though the period is measured in
+      microseconds. Also note that the remainder output terminal is not connected.</p>
+
+      <figure>
+        <img src="../src/counter/figure_7.JPG" alt="Frequency counter block diagram">
+        <figcaption><span class="fig-label">Figure 7:</span>Frequency counter block
+        diagram</figcaption>
+      </figure>
+
+      <p>The main control of the frequency counter is implemented using a finite state machine
+      (FSM). The state transition diagram of the FSM is shown in Figure 8. The system starts in the
+      “Idle” state and transitions to the “Count” state when the “start” button is pressed. The
+      machine transitions to the “Frq” state when the period counter finishes its operation. Once
+      the division circuit finishes, the state moves to “B2B” for the binary-to-BCD converter. Once
+      the converter finishes, the system returns to the “Idle” state. The outputs of the FSM block
+      are the “start” signals needed by the modules to commence operation. The inputs to the FSM are
+      the “ready” and “done” signals that each module sends.</p>
+
+      <figure>
+        <img src="../src/counter/figure_8.JPG" alt="Frequency counter state transition diagram">
+        <figcaption><span class="fig-label">Figure 8:</span>Frequency counter state transition
+        diagram</figcaption>
+      </figure>
+    </section>
+
+    <!--Testing-->
+    <section>
+      <h2 id="test">Testing</h2>
+
+      <p>Once all the hardware was developed, the code was verified using a testbench simulation to
+      evaluate performance across various input frequencies. The main goal of the testbench was to
+      check the values of the BCD digits and the decimal point location for various inputs. The
+      hardware was then synthesized and implemented on the FPGA as shown in Figure 9.</p>
+
+      <figure>
+        <img src="../src/counter/figure_9.jpg" alt="FPGA board with input signal connected">
+        <figcaption><span class="fig-label">Figure 9:</span>FPGA board with input signal
+        connected</figcaption>
+      </figure>
+
+      <p>Video 1 shows a live test of the auto-scaled frequency counter stepping through multiple
+      frequencies. The frequencies tested included 2 kHz, 200 Hz, 20 Hz, and 2 Hz. Once the square
+      wave was generated, the “start” button was pressed. Between each test, the “reset” button
+      needed to be pressed. There are some discrepancies in the measured data. Some of these
+      inconsistencies can be explained by the low-cost function generator (~$30).</p>
+
+      <figure class="video-figure">
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/6FGjCyLRVTs" title="Demo of Auto-Scaled
+          Frequency Counter" allow="encrypted-media; picture-in-picture" allowfullscreen>
+          </iframe>
+        </div>
+        <figcaption><span class="fig-label">Video 1:</span>Demo of auto-scaled frequency
+        counter</figcaption>
+      </figure>
+
+      <p>Since the period counter counts in microseconds, there is measurement error expected at the
+      larger frequencies. For example, at the largest frequency that can be output (9.999 kHz), the
+      error can reach up to approximately 0.5% in this range. This error falls to about 0.05% at
+      frequencies around 999.9 Hz. The lower the frequency, the less error in the reading. Although
+      the FPGA clock has a 10 ns period, this implementation measures time in microseconds for
+      simplicity. The error could be reduced by increasing the time resolution to the nanosecond
+      range.</p>
+
+      <a href="#outline" class="return-link">↑ Return to Outline</a>
+    </section>
+  </main>
+</body>
+</html>
