@@ -114,7 +114,7 @@
       necessary control signals to perform the operations. A state transition diagram of the
       controller is shown in Figure 3. The system starts in the “Idle” state, and when the “start”
       signal is asserted, the “load” signal is sent to the datapath. The system then transitions to
-      the ‘Add’ state, where the “increment” signal is sent to the datapath, and the “add” signal is
+      the "Add" state, where the “increment” signal is sent to the datapath, and the “add” signal is
       only sent if the LSB of Register B is high. After a single clock cycle, the system transitions
       to the “Shift” state in which the “shift” signal is sent to the datapath. The machine goes
       back into the “Add” state, and the process repeats until the “done” signal is received in the
@@ -122,8 +122,9 @@
       “Idle” state.</p>
 
       <figure>
-        <img src="../src/multiplier/figure_3.jpg" alt="State transition diagram">
-        <figcaption><span class="fig-label">Figure 3:</span>State transition diagram</figcaption>
+        <img src="../src/multiplier/figure_3.jpg" alt="State transition diagram for controller">
+        <figcaption><span class="fig-label">Figure 3:</span>State transition diagram for
+        controller</figcaption>
       </figure>
 
       <p>A block diagram of the controller is shown in Figure 4. The states of the machine can be
@@ -136,7 +137,7 @@
       asserted. The “done” input signal comes from the counter in the datapath. The “clock” is a
       square waveform input to synchronize all the sequential devices. Lastly, the “reset” signal
       can be used to reset the flip-flops back to the “Idle” state, although this is not strictly
-      required, as the system returns to the ‘Idle’ state automatically at the end of operation.
+      required, as the system returns to the "Idle" state automatically at the end of operation.
       This signal is implemented on push button B4.</p>
 
       <figure>

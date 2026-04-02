@@ -209,10 +209,10 @@
     <section>
       <h3 id="pwm1">PWM Generator and Gate Drive</h3>
 
-      <p>A schematic of the PWM generator and gate driver section is shown in Figure 5. To generate
-      a PWM signal for the gate driver, a 10 kHz sawtooth waveform needs to be generated. The
-      waveform is created using a TLC555CDR timer U3 and LM334 current source U4. The timer is wired
-      to operate as an astable oscillator. Resistor RT1 and potentiometer RP3 are used to set the
+      <p>A schematic of the PWM generator and gate driver section is shown in Figure 5. To produce a
+      PWM signal for the gate driver, a 10 kHz sawtooth waveform needs to be generated. The waveform
+      is created using a TLC555CDR timer U3 and LM334MX current source U4. The timer is wired to
+      operate as an astable oscillator. Resistor RT1 and potentiometer RP3 are used to set the
       reference to the current source (about 40 μA), which charges up the capacitor CT1. Once the
       capacitor charges to two-thirds of the input voltage of 5 V from the LDO, it discharges
       through the timer instantly. The capacitor immediately starts charging back up to 3.3 V
@@ -237,7 +237,7 @@
       included in Table 1. The losses are ordered from most significant to least significant for the
       light load. Internal resistance of the battery is not included to isolate converter
       performance. Also, losses in the inductor core are difficult to predict and are not included.
-      Both losses may be significant. An early estimate of efficiency is 96–97%</p>
+      Both losses may be significant. An early estimate of efficiency is 96–97%.</p>
 
       <figure class="table-figure">
         <figcaption><span class="fig-label">Table 1:</span>Summary of Power Losses</figcaption>
@@ -332,7 +332,7 @@
       encapsulated in the CCM2 block, which also captures the MOSFET on-resistance and diode forward
       voltage drop. Capacitor equivalent series resistance (ESR) is also included in the model. The
       transfer function of the output voltage with respect to duty cycle for the light load is shown
-      in Figure 9. The results closely matched the analytical results in Figure 2.</p>
+      in Figure 9. The results closely match the analytical results in Figure 2.</p>
 
       <figure>
         <img src="../src/boost/figure_9.jpg" alt="Simulated plant transfer function">
@@ -378,10 +378,11 @@
       <p>The LTspice model used to test the PWM generator is shown in Figure 12. A current source is
       used to replace U4 in the schematic. The reference source entering the noninverting terminal
       of the comparator simulates the output of the compensator. The sawtooth waveform and the duty
-      cycle waveforms are shown in Figure 13. The green curve shows two different duty corresponding
-      to two different input reference levels. The sawtooth waveform is slightly slower than 10 kHz
-      due to the 10 MΩ resistor influencing the charging time. The current source can be tuned with
-      RP3 to increase the current, so the resistor is of no concern.</p>
+      cycle waveforms are shown in Figure 13. The green curve shows two different duty cycles
+      generated corresponding to two different input reference levels. The sawtooth waveform is
+      slightly slower than 10 kHz due to the 10 MΩ resistor influencing the charging time. The
+      current source can be tuned with RP3 to increase the current, so the resistor is of no
+      concern.</p>
 
       <figure>
         <img src="../src/boost/figure_12.jpg" alt="LTspice PWM generator model">
@@ -402,8 +403,8 @@
 
       <p>Converters are known to generate large amounts of electromagnetic interference (EMI) caused
       by the input current waveform. Figure 14 shows a zoomed-in view of the current waveform from
-      the circuit in Figure 6. The input supply is a 10 kHz triangular wave with an amplitude of a
-      few hundred milliamps. The current oscillations can add EMI from the input power source.</p>
+      the circuit in Figure 6. The input supply is a 10 kHz triangular waveform with an amplitude of
+      a few hundred milliamps. The current oscillations can add EMI from the input power source.</p>
 
       <figure>
         <img src="../src/boost/figure_14.jpg" alt="Input current waveform">
@@ -413,13 +414,13 @@
       <p>The goal of the input filter design was to achieve as much attenuation as possible while
       not affecting the loop gain and choosing all inductors under 100 μH and all capacitors under
       100 μF. A two-stage filter was then designed using the <a
-      href="https://en.wikipedia.org/wiki/Extra_element_theorem">Extra Element Theorem (EET)</a>.
-      The filter added to the open-loop model is shown in Figure 15. Each stage incorporates an LC
-      filter with damping. The damping is responsible for ensuring that the poles of the filter
-      don’t interfere with the loop gain and output impedance of the converter. The inductor DCR for
-      both filter inductors was assumed to be 0.5 Ω.  The attenuation at the switching frequency was
-      maximized to 35 dB. Figure 16 shows the input current with the attenuation as compared to
-      Figure 14.</p>
+      href="https://en.wikipedia.org/wiki/Extra_element_theorem" target="_blank">Extra Element
+      Theorem (EET)</a>. The filter added to the open-loop model is shown in Figure 15. Each stage
+      incorporates an LC filter with damping. The damping is responsible for ensuring that the poles
+      of the filter don’t interfere with the loop gain and output impedance of the converter. The
+      inductor DCR for both filter inductors was assumed to be 0.5 Ω.  The attenuation at the
+      switching frequency was maximized to 35 dB. Figure 16 shows the input current with the
+      attenuation as compared to Figure 14.</p>
 
       <figure>
         <img src="../src/boost/figure_15.jpg" alt="LTspice switching circuit with input filter">
@@ -434,10 +435,9 @@
       </figure>
 
       <p>The loop gain and output impedance were recalculated and plotted for the lighter load in
-      Figures 17 and 18, respectively, for the light load case. The red curves are without an input
-      filter, and the green curves are with the filter. As can be seen, there are minimal changes in
-      both plots, meaning the filter does not impact the small-signal characteristics of the boost
-      converter.</p>
+      Figures 17 and 18, respectively. The red curves are without an input filter, and the green
+      curves are with the filter. As can be seen, there are minimal changes in both plots, meaning
+      the filter does not impact the small-signal characteristics of the boost converter.</p>
 
       <figure>
         <img src="../src/boost/figure_17.jpg" alt="Loop gain plots with and without filter">
@@ -867,8 +867,9 @@
       resistor. The potentiometer is used to create other load conditions. Also shown is the
       operation of the switching frequency and output reference tuning potentiometers. Next,
       variations in the input supply voltage were shown. Lastly, some of the tests were repeated
-      with the battery connected. A ringing noise can be heard since the switching frequency is in
-      the audible range.</p>
+      with the battery connected. The yellow curve on the oscilloscope corresponds to the AC coupled
+      output voltage, and the blue curve is the input current waveform. A ringing noise can be heard
+      since the switching frequency is in the audible range.</p>
 
       <figure class="video-figure">
         <div class="video-container">

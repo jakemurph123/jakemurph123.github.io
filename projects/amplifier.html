@@ -84,7 +84,7 @@
       2N3904 BJTs. These transistors are well-suited for low-power amplification due to their high
       current gain, which was important in this application. Since the output of the amplifier feeds
       back to node FB, transistor QD2 acts as the inverting input node, while QD1 serves as the
-      non-inverting input. The circuit is configured to operate similarly to a non-inverting
+      noninverting input. The circuit is configured to operate similarly to a noninverting
       amplifier using feedback.</p>
 
       <figure>
@@ -104,7 +104,7 @@
       is used to establish the bias voltage for the input transistors. Capacitor CC2 connected to
       the VREF node is used to filter any noise that the power supply may have, so it doesn’t
       interfere with the signal to be amplified. The capacitor also has the added benefit of the
-      input signal only needing to pass through a single resistor to get to AC ground. This results
+      input signal only needing to pass through a single resistor to get to AC ground, which results
       in a more predictable input impedance. After the input power is filtered, the undisturbed bias
       currents can pass through the base resistors RB1 and RB2.</p>
 
@@ -135,9 +135,9 @@
 
       <p>The output of the differential pair is taken single-ended at the noninverting side as the
       input to the first buffer stage. This stage is highlighted in Figure 3. The output is taken
-      from the non-inverting side to maintain negative feedback. This buffer stage is necessary so
+      from the noninverting side to maintain negative feedback. This buffer stage is necessary so
       that the following common emitter stage does not load the output of the differential pair
-      stage. Without the buffer, the overall open loop gain will diminish significantly. The stage
+      stage. Without the buffer, the overall open-loop gain will diminish significantly. The stage
       is biased by resistor RE3 with around 500 μA.</p>
 
       <figure>
@@ -152,11 +152,11 @@
       signal to ground. This capacitor is necessary to bypass the emitter degeneration and increase
       small-signal gain. The two capacitors and resistor located between the base and collector
       terminals acts as a Miller compensation network used to set the dominant pole of the open-loop
-      response. The compensation network also influences the slew rate, which is limited by the
-      available charging current of the compensation capacitor. The slew rate of the amplifier was
-      calculated to be around 0.5 V/μs. The collector resistor RC3 was chosen for high gain while
-      also allowing large signal swing in the output. This stage is the main bottleneck in terms of
-      the largest voltage swings that can occur at the output.</p>
+      response. The network also influences the slew rate, which is limited by the available
+      charging current of the compensation capacitor. The slew rate of the amplifier was calculated
+      to be around 0.5 V/μs. The collector resistor RC3 was chosen for high gain while also allowing
+      large signal swing in the output. This stage is the main bottleneck in terms of the largest
+      voltage swings that can occur at the output.</p>
 
       <figure>
         <img src="../src/amplifier/figure_4.jpg" alt="Common emitter stage">
@@ -322,7 +322,7 @@
       until 2 kHz, before its impact is negligible. The output impedance stays below 10 Ω from 70 Hz
       to 60 kHz. The impedance stays below 5 Ω from 200 Hz to 30 kHz. The smaller the feedback
       resistor, the further the upper frequency is located. This is consistent with the discussion
-      of loop gain discussed soon. The plot with the capacitor removed shows far superior
+      of loop gain explained soon. The plot with the capacitor removed shows far superior
       performance. The impedance stays below 0.5 Ω from 40 Hz to 5 MHz. These results highlight the
       drawback of the capacitor.</p>
 
@@ -364,10 +364,11 @@
       is at a maximum, as shown in Figure 7. The curves are ordered top to bottom based on the
       feedback factor. The lower the resistor, the higher the feedback factor and the more loop gain
       present. The dotted lines represent the phase. The phase of the loop gain directly correlates
-      to the phase margin of the system. The lowest phase margin observed is around 32 degrees. It
-      is interesting to note that the smallest phase margin occurred with the 10 kΩ feedback
-      resistor, and the phase margins at unity feedback and maximum feedback were 71 degrees and 62
-      degrees, respectively.</p>
+      to the phase margin of the system, which is a good indicator of the overall stability of the
+      amplifier. The lowest phase margin observed is around 32 degrees. It is interesting to note
+      that the smallest phase margin occurred with the 10 kΩ feedback resistor, and the phase
+      margins at unity feedback and maximum feedback were 71 degrees and 62 degrees,
+      respectively.</p>
 
       <figure>
         <img src="../src/amplifier/figure_14.jpg" alt="Loop gains for various cases">
@@ -460,9 +461,9 @@
 
       <p>Some images saved by the oscilloscope are provided. The yellow curves are the input signal,
       and the blue curves are the amplified signals. Figure 20 shows a full output swing of -2 V to
-      +2 V with no visible distortion. The potentiometer is also set to maximum gain of around 100.
-      Figure 21 shows a high-frequency and high-amplitude signal that is distorted. This picture
-      verifies the slew rate of 0.3 V/μs, which is slightly less than the prediction of 0.5
+      +2 V with no visible distortion. The potentiometer is also set to the maximum gain of around
+      100. Figure 21 shows a high-frequency and high-amplitude signal that is distorted. This
+      picture verifies the slew rate of 0.3 V/μs, which is slightly less than the prediction of 0.5
       V/μs.</p>
 
       <figure>
@@ -493,13 +494,13 @@
             <tr><td>Power Consumption</td><td>120 mW</td></tr>
             <tr><td>Output Swing</td><td>-2 V to +2 V</td></tr>
             <tr><td>Slew Rate</td><td>0.3 V/μs</td></tr>
-            <tr><td>Open Loop Gain</td><td>81 dB</td></tr>
-            <tr><td>Closed Loop Gain</td><td>1 – 101</td></tr>
+            <tr><td>Open-Loop Gain</td><td>81 dB</td></tr>
+            <tr><td>Closed-Loop Gain</td><td>1 – 101</td></tr>
             <tr><td>Input Impedance</td><td>10 kΩ</td></tr>
             <tr><td>Output Impedance (w/ cap)</td><td>&lt; 20 Ω</td></tr>
             <tr><td>Output Impedance (w/o cap)</td><td>&lt; 1 Ω</td></tr>
             <tr><td>Gain-Bandwidth (GBW)</td><td>4 MHz</td></tr>
-            <tr><td>Closed Loop Bandwidth</td><td>0.2 Hz – 40 kHz</td></tr>
+            <tr><td>Closed-Loop Bandwidth</td><td>0.2 Hz – 40 kHz</td></tr>
             <tr><td>Phase Margin</td><td>32 – 71 deg</td></tr>
           </tbody>
         </table>
@@ -508,7 +509,7 @@
       <p>A demo of the amplifier under testing is shown in Video 1. This video illustrates the
       variable gain, output swing, slew rate, and bandwidth limitations. The function generator used
       for the screenshots and video (~$30) exhibits significant noise at low-amplitude signals.
-      Testing at higher gains is limited with clean input signals for this reason, and due to the
+      Testing at higher gains is limited because the input signals need to be larger, and due to the
       output swing limitation. Also, there is a transient settling effect observed on the
       oscilloscope when large output swings occur from either the gain potentiometer or the
       amplitude of the function generator. This delay causes the DC level of the output to swing and

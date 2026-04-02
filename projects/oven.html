@@ -70,9 +70,9 @@
         <li>Control the heating rate using a potentiometer</li>
       </ul>
 
-      <p>For each of the tasks, a state-transition diagram was used to accurately track the states
+      <p>For each of the tasks, a state transition diagram was used to accurately track the states
       of each component. The diagram also makes the program logic much easier. Figure 1 shows the
-      state-transition diagram for temperature. The system starts in the “Idle” state, and
+      state transition diagram for temperature. The system starts in the “Idle” state, and
       transitions to the “Off” state when the “start” signal is received. The machine transitions to
       the “On” state when the “on” signal is received. If the oven is turned back “off”, the oven
       returns to the “Off” state. In the “On” state, the heat is applied, and the temperature
@@ -106,7 +106,7 @@
         <figcaption><span class="fig-label">Figure 2:</span>GUI on startup</figcaption>
       </figure>
 
-      <p>Once the oven is activated, an animation of the plot becomes active. The heat increases
+      <p>Once the oven is activated, an animation of the plot becomes live. The heat increases
       linearly until the oven temperature is raised just above the desired temperature. The oven
       constantly turns on and off to maintain the desired temperature within a few degrees. An image
       of the GUI showing the process over time is given in Figure 3. It is important to note that
@@ -122,7 +122,7 @@
       <p>The Python program also has a dynamic mode feature, which more accurately represents the
       heating process. A first-order heating model can be enabled to get a more realistic
       simulation. In this mode, the potentiometer controls the inverse of the time constant for the
-      exponential response. An image of the GUI using this dynamic mode is provided in Figure 4.</p>
+      exponential response. An image of the GUI using the dynamic mode is provided in Figure 4.</p>
 
       <figure>
         <img src="../src/oven/figure_4.jpg" alt="GUI in dynamic mode">

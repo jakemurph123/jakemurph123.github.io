@@ -7,21 +7,133 @@
   <title>Home</title>
 </head>
 
-<!--Navigation Header-->
-<header>
-  <nav class="navbar">
-    <div class="logo">Jacob's Portfolio</div>
-    <ul class="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="about.html">About</a></li>
-    </ul>
-  </nav>
-</header>
-
-<!--Start of Webpage-->
 <body>
-  <h1>In Development</h1>
-  <a href="./projects.html">Projects</a>
+  <!--Navigation Header-->
+  <header>
+    <nav class="navbar">
+      <div class="logo">Jacob's Portfolio</div>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="about.html">About</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!--Start of Webpage-->
+  <main>
+    <!--Home Header-->
+    <section class="home-hero">
+      <div class="home-hero-image">
+        <img src="src/portrait.jpg" alt="Your portrait">
+      </div>
+
+      <div class="home-hero-text">
+        <h2>Jacob Murphy, EIT</h2>
+        <p>Mechanical engineering graduate with a strong self-taught foundation in electrical
+        engineering and over two years of professional work. Skilled in root cause analysis,
+        system-level problem solving, and cross-disciplinary design. Actively expanding technical
+        knowledge across multiple disciplines with a focus on continuous learning and development.
+        Known for analytical aptitude, clear communication, organization, and the ability to lead and
+        execute projects effectively.</p>
+      </div>
+
+      <div class="section-divider"></div>
+    </section>
+
+    <!--Featured Projects-->
+    <section class="home-projects">
+      <h2>Featured Projects</h2>
+
+      <div class="home-project-grid">
+        <div class="home-project-card">
+          <a href="projects/boost.html">
+            <img src="src/boost/figure_0.jpg" alt="Boost converter PCB">
+          </a>
+          <h3>Boost Converter</h3>
+          <p>Converter designed using LTspice and KiCad achieving an efficiency over 90%.
+          Implements PWM generation and PID control.</p>
+          <a href="projects/boost.html">View More →</a>
+        </div>
+        
+        <div class="home-project-card">
+          <a href="projects/robot.html">
+            <img src="src/robot/figure_0.jpg" alt="Mobile robot in simulation environment">
+          </a>
+          <h3>Robotic Manipulation</h3>
+          <p>Mobile robot completing pick and place tasks in the CoppeliaSim environment. Techniques
+          include motion planning and feedback control.</p>
+          <a href="projects/robot.html">View More →</a>
+        </div>
+
+        <div class="home-project-card">
+          <a href="projects/counter.html">
+            <img src="src/counter/figure_0.jpg" alt="Frequency counter on FPGA">
+          </a>
+          <h3>Frequency Counter</h3>
+          <p>FPGA development using SystemVerilog and Xilinx Vivado. Incorporates automatic decimal
+          point placement for additional precision.</p>
+          <a href="projects/counter.html">View More →</a>
+        </div>
+      </div>
+
+      <div class="home-projects-cta">
+        <a href="projects.html" class="home-btn-primary">All Projects</a>
+      </div>
+
+      <div class="section-divider"></div>
+    </section>
+
+    <!--Skills-->
+    <section class="home-skills">
+      <h2>Engineering Skills</h2>
+
+      <div class="home-skills-grid">
+        <div>
+          <h3>Mechanical</h3>
+          <ul>
+            <li>SolidWorks</li>
+            <li>Onshape</li>
+            <li>SkyCiv</li>
+            <li>Abaqus</li>
+            <li>CoppeliaSim</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h3>Electrical</h3>
+          <ul>
+            <li>KiCad</li>
+            <li>LTspice</li>
+            <li>Vivado/Vitis</li>
+            <li>Arduino</li>
+            <li>CLICK PLC</li>
+            <li>PowerWorld</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Languages</h3>
+          <ul>
+            <li>Python</li>
+            <li>C/C++</li>
+            <li>SystemVerilog</li>
+            <li>MATLAB</li>
+            <li>HTML/CSS/JS</li>
+          </ul>
+        </div>
+
+        <div>
+          <h3>Fabrication</h3>
+          <ul>
+            <li>3D Printing</li>
+            <li>Soldering</li>
+            <li>Power & Hand Tools</li>
+            <li>System Assembly</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </main>
 </body>
 </html>

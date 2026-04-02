@@ -102,8 +102,8 @@
         <figcaption><span class="fig-label">Figure 3:</span>Division circuit symbol</figcaption>
       </figure>
 
-      <p>The long division algorithm used is analogous to the long division operation between two
-      binary numbers. An FSMD can also be used for this circuit. The flow of the datapath is as
+      <p>The division algorithm used is analogous to the long division operation between two binary
+      numbers. An FSMD can also be used for this circuit. The flow of the datapath is as
       follows:</p>
 
       <ol>
@@ -183,9 +183,10 @@
       time division multiplexing to display all four digits at the same time. The inputs to the
       top-level module include the clock, start and reset push buttons, and the square wave input
       signal provided by a function generator. Figure 7 shows how all subsystems (excluding the
-      display module) are wired together. The dividend is set to 1,000,000,000 (decimal) to preserve
-      additional significant figures during division, even though the period is measured in
-      microseconds. Also note that the remainder output terminal is not connected.</p>
+      display module) are wired together. The dividend of the division circuit is set to
+      1,000,000,000 (decimal) to preserve additional significant figures during operation, even
+      though the period is measured in microseconds. Also note that the remainder output terminal is
+      not connected.</p>
 
       <figure>
         <img src="../src/counter/figure_7.jpg" alt="Frequency counter block diagram">
